@@ -29,8 +29,7 @@ export function PokemonDetailDialog({
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <span>#{pokemon.pokedex_id.toString().padStart(3, '0')}</span>
-            <span className="text-xl">{pokemon.name.en}</span>
-            <span className="text-sm text-slate-500">({pokemon.name.fr})</span>
+            <span className="text-xl">{pokemon.name.fr}</span>
           </DialogTitle>
         </DialogHeader>
 
@@ -178,18 +177,30 @@ export function PokemonDetailDialog({
 
               <TabsContent value="abilities" className="mt-4">
                 {pokemon.talents && pokemon.talents.length > 0 ? (
-                  <ul className="space-y-2">
+                  <div className="grid grid-cols-1 gap-3">
                     {pokemon.talents.map((talent) => (
-                      <li
+                      <div
                         key={talent}
-                        className="p-2 bg-slate-100 dark:bg-slate-800 rounded"
+                        className="p-4 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/40 dark:to-teal-950/40 rounded-lg border border-emerald-200 dark:border-emerald-800 shadow-sm group hover:shadow-md transition-all"
                       >
-                        {typeof talent === 'string'
-                          ? talent
-                          : JSON.stringify(talent)}
-                      </li>
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 rounded-full bg-emerald-400 dark:bg-emerald-500"></div>
+                          <h3 className="font-medium text-emerald-800 dark:text-emerald-300 group-hover:text-emerald-600 dark:group-hover:text-emerald-200 transition-colors">
+                            {typeof talent === 'string'
+                              ? talent
+                              : talent &&
+                                  typeof talent === 'object' &&
+                                  'name' in talent
+                                ? // @ts-ignore
+                                  talent.name
+                                : typeof talent === 'object'
+                                  ? Object.values(talent)[0]
+                                  : String(talent)}
+                          </h3>
+                        </div>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 ) : (
                   <p className="text-slate-500">No abilities data available</p>
                 )}
