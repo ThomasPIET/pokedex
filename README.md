@@ -92,4 +92,9 @@ pnpm format
 - Components are built using Radix UI primitives for accessibility
 - TailwindCSS is used for styling
 - Type-safety is enforced with TypeScript
+  
+  
+## Deployment 
+
+- The site has been deployed with vercel, you can access it thanks to the url: https://pokedex-xi-lac.vercel.app/
 
