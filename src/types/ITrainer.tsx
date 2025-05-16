@@ -1,7 +1,9 @@
-type ITrainer = {
-  id: number;
+interface ITrainer {
+  id?: number;
   name: string;
-  age: number;
-};
+  region: string;
+  badges?: number;
+  avatar?: string;
+}
 
 export default ITrainer;
