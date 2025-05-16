@@ -57,7 +57,7 @@ The application uses the [Tyradex API](https://tyradex.vercel.app) to fetch Pok√
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone git@github.com:ThomasPIET/pokedex.git
 
 # Navigate to the project directory
 cd pokedex
