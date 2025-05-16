@@ -9,17 +9,22 @@ import {
   CardHeader,
   CardTitle,
 } from './ui/card';
-import TrainerInfo from './trainerInfo';
+import TrainerInfo from './TrainerInfo.tsx';
 import { CreateTrainerDialog } from './CreateTrainerDialog';
+import { useAppDispatch } from '../hooks/useAppDispatch.ts';
+import { addTrainer } from '../store/slices/trainer-slice.ts';
 
 let nextID = 0;
 
 export const TrainerCard = () => {
   const [trainers, setTrainers] = useState<ITrainer[]>([]);
 
+  const dispatch = useAppDispatch();
+
   const handleCreate = (t: ITrainer) => {
     const id = nextID++;
     setTrainers([...trainers, { ...t, id: id }]);
+    dispatch(addTrainer({ ...t }));
   };
 
   return (

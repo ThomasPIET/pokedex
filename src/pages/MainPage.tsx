@@ -7,9 +7,15 @@ export const MainPage = () => {
       <div className="w-2/3 ">
         <PokedexCard />
       </div>
+
       <div className="w-1/3 ">
         <TrainerCard />
       </div>
     </div>
   );
 };
+
+
+
+
+

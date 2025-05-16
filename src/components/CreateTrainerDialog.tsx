@@ -13,7 +13,6 @@ import { Label } from '@/components/ui/label';
 import ITrainer from '@/types/ITrainer';
 import { useState } from 'react';
 
-
 interface CreateTrainerDialogProps {
   onCreate: (trainer: ITrainer) => void;
 }
@@ -66,7 +65,7 @@ export const CreateTrainerDialog: React.FC<CreateTrainerDialogProps> = ({
         <DialogFooter>
           <Button
             onClick={() => {
-              onCreate({id: Date.now(), name, age });
+              onCreate({ id: Date.now(), name, age });
               setName('');
               setAge(0);
             }}
