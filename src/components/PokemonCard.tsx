@@ -27,14 +27,14 @@ export function PokemonCard({ pokemon }: PokemonCardProps) {
         onMouseLeave={() => setIsHovered(false)}
         onClick={() => setIsDialogOpen(true)}
       >
-        <div className="relative pt-6 flex justify-center items-center bg-white dark:bg-slate-800">
+        <div className="relative pt-4 flex justify-center items-center bg-white dark:bg-slate-800">
           <span className="absolute top-2 left-2 text-xs text-slate-500 font-mono">
             #{pokemon.pokedex_id.toString().padStart(3, '0')}
           </span>
           <img
             src={imageSrc || '/placeholder.svg'}
             alt={pokemon.name.en}
-            className="h-24 w-24 object-contain transition-transform duration-300 group-hover:scale-110"
+            className="h-20 w-20 object-contain transition-transform duration-300 group-hover:scale-110"
           />
         </div>
         <CardHeader className="p-3 pb-0">
