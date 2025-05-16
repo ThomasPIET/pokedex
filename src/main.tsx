@@ -4,7 +4,7 @@ import './index.css';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { IntroPage } from './pages/IntroPage';
-import { NotFound } from '@/pages/404Page.tsx';
+import { NotFound } from './pages/404Page.tsx';
 import React from 'react';
 import { store } from './store/store';
 import { Provider } from 'react-redux';
