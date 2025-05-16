@@ -6,33 +6,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { cn } from '@/lib/utils';
 import type IPokemon from '../types/IPokemon';
-
-// Type color mapping
-const typeColors: Record<string, string> = {
-  normal: 'bg-stone-400',
-  fire: 'bg-orange-500',
-  water: 'bg-blue-500',
-  electric: 'bg-yellow-400',
-  grass: 'bg-green-500',
-  ice: 'bg-cyan-300',
-  fighting: 'bg-red-700',
-  poison: 'bg-purple-600',
-  ground: 'bg-amber-600',
-  flying: 'bg-indigo-300',
-  psychic: 'bg-pink-500',
-  bug: 'bg-lime-500',
-  rock: 'bg-yellow-700',
-  ghost: 'bg-purple-800',
-  dragon: 'bg-indigo-600',
-  dark: 'bg-stone-700',
-  steel: 'bg-slate-400',
-  fairy: 'bg-pink-300',
-};
 
 interface PokemonDetailDialogProps {
   pokemon: IPokemon;
@@ -45,7 +21,6 @@ export function PokemonDetailDialog({
   open,
   onOpenChange,
 }: PokemonDetailDialogProps) {
-  // Max stat value for scaling the progress bars
   const MAX_STAT = 255;
 
   return (
@@ -72,22 +47,6 @@ export function PokemonDetailDialog({
               />
             </div>
 
-            <div className="mt-4 flex flex-wrap gap-2 justify-center">
-              {pokemon.types?.map((type) => (
-                <Badge
-                  key={type}
-                  className={cn(
-                    'text-white px-3 py-1',
-                    typeColors[
-                      typeof type === 'string' ? type.toLowerCase() : ''
-                    ] || 'bg-slate-500'
-                  )}
-                >
-                  {type}
-                </Badge>
-              ))}
-            </div>
-
             <div className="mt-4 grid grid-cols-2 gap-4 w-full text-sm">
               <div className="flex flex-col">
                 <span className="text-slate-500">Category</span>
@@ -106,7 +65,7 @@ export function PokemonDetailDialog({
               {pokemon.weight && (
                 <div className="flex flex-col">
                   <span className="text-slate-500">Weight</span>
-                  <span>{pokemon.weight} kg</span>
+                  <span>{pokemon.weight}</span>
                 </div>
               )}
             </div>
@@ -132,60 +91,84 @@ export function PokemonDetailDialog({
                     <div>
                       <div className="flex justify-between mb-1">
                         <span>HP</span>
-                        <span>{pokemon.stats.hp}</span>
+                        <span>{pokemon.stats?.hp}</span>
                       </div>
                       <Progress
-                        value={(pokemon.stats.hp / MAX_STAT) * 100}
+                        value={
+                          pokemon.stats?.hp
+                            ? (pokemon.stats.hp / MAX_STAT) * 100
+                            : 0
+                        }
                         className="h-2"
                       />
                     </div>
                     <div>
                       <div className="flex justify-between mb-1">
                         <span>Attack</span>
-                        <span>{pokemon.stats.attack}</span>
+                        <span>{pokemon.stats?.atk}</span>
                       </div>
                       <Progress
-                        value={(pokemon.stats.attack / MAX_STAT) * 100}
+                        value={
+                          pokemon.stats?.atk
+                            ? (pokemon.stats.atk / MAX_STAT) * 100
+                            : 0
+                        }
                         className="h-2"
                       />
                     </div>
                     <div>
                       <div className="flex justify-between mb-1">
                         <span>Defense</span>
-                        <span>{pokemon.stats.defense}</span>
+                        <span>{pokemon.stats?.def}</span>
                       </div>
                       <Progress
-                        value={(pokemon.stats.defense / MAX_STAT) * 100}
+                        value={
+                          pokemon.stats?.def
+                            ? (pokemon.stats.def / MAX_STAT) * 100
+                            : 0
+                        }
                         className="h-2"
                       />
                     </div>
                     <div>
                       <div className="flex justify-between mb-1">
                         <span>Special Attack</span>
-                        <span>{pokemon.stats.special_attack}</span>
+                        <span>{pokemon.stats?.spe_atk}</span>
                       </div>
                       <Progress
-                        value={(pokemon.stats.special_attack / MAX_STAT) * 100}
+                        value={
+                          pokemon.stats?.spe_atk
+                            ? (pokemon.stats.spe_atk / MAX_STAT) * 100
+                            : 0
+                        }
                         className="h-2"
                       />
                     </div>
                     <div>
                       <div className="flex justify-between mb-1">
                         <span>Special Defense</span>
-                        <span>{pokemon.stats.special_defense}</span>
+                        <span>{pokemon.stats?.spe_def}</span>
                       </div>
                       <Progress
-                        value={(pokemon.stats.special_defense / MAX_STAT) * 100}
+                        value={
+                          pokemon.stats?.spe_def
+                            ? (pokemon.stats.spe_def / MAX_STAT) * 100
+                            : 0
+                        }
                         className="h-2"
                       />
                     </div>
                     <div>
                       <div className="flex justify-between mb-1">
                         <span>Speed</span>
-                        <span>{pokemon.stats.speed}</span>
+                        <span>{pokemon.stats?.vit}</span>
                       </div>
                       <Progress
-                        value={(pokemon.stats.speed / MAX_STAT) * 100}
+                        value={
+                          pokemon.stats?.vit
+                            ? (pokemon.stats.vit / MAX_STAT) * 100
+                            : 0
+                        }
                         className="h-2"
                       />
                     </div>
@@ -201,7 +184,9 @@ export function PokemonDetailDialog({
                         key={talent}
                         className="p-2 bg-slate-100 dark:bg-slate-800 rounded"
                       >
-                        {talent}
+                        {typeof talent === 'string'
+                          ? talent
+                          : JSON.stringify(talent)}
                       </li>
                     ))}
                   </ul>
@@ -218,7 +203,11 @@ export function PokemonDetailDialog({
                         key={resistance.type}
                         className="flex justify-between p-2 bg-slate-100 dark:bg-slate-800 rounded"
                       >
-                        <span>{resistance.type}</span>
+                        <span>
+                          {typeof resistance.type === 'string'
+                            ? resistance.type
+                            : JSON.stringify(resistance.type)}
+                        </span>
                         <span
                           className={
                             resistance.multiplier > 1

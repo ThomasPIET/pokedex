@@ -12,23 +12,7 @@ export const pokemonAPI = createApi({
       query: () => ``,
       providesTags: ['pokemon'],
     }),
-    getPokemonById: builder.query<IPokemon, string>({
-      query: (id) => `/pokemon/${id}`,
-      providesTags: ['pokemon'],
-    }),
-    addPokemon: builder.mutation<void, IPokemon>({
-      query: (newPokemon) => ({
-        url: '/pokemon',
-        method: 'POST',
-        body: newPokemon,
-      }),
-      invalidatesTags: ['pokemon'],
-    }),
   }),
 });
 
-export const {
-  useGetPokemonsQuery,
-  useGetPokemonByIdQuery,
-  useAddPokemonMutation,
-} = pokemonAPI;
+export const { useGetPokemonsQuery } = pokemonAPI;

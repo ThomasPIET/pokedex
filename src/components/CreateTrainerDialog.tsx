@@ -60,7 +60,6 @@ export function CreateTrainerDialog({ onCreate }: CreateTrainerDialogProps) {
       avatar,
     });
 
-    // Reset form
     setName('');
     setRegion('');
     setBadges('0');

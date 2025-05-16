@@ -5,7 +5,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
@@ -29,7 +28,6 @@ export const TrainerCard = () => {
     dispatch(addTrainer(newTrainer));
   };
 
-  // Group trainers by region
   const trainersByRegion = trainers.reduce(
     (acc, trainer) => {
       if (!acc[trainer.region]) {
@@ -48,12 +46,14 @@ export const TrainerCard = () => {
         <CardDescription>Manage your Pokémon trainers</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 overflow-hidden">
+        <CreateTrainerDialog onCreate={handleCreate} />
+
         {trainers.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-32 text-center">
             <p className="text-slate-500 mb-4">No trainers registered yet</p>
           </div>
         ) : (
-          <Tabs defaultValue="all" className="h-full flex flex-col">
+          <Tabs defaultValue="all" className="h-full pt-4 flex flex-col">
             <TabsList className="grid grid-cols-3">
               <TabsTrigger value="all">All</TabsTrigger>
               <TabsTrigger value="region">By Region</TabsTrigger>
@@ -108,9 +108,6 @@ export const TrainerCard = () => {
           </Tabs>
         )}
       </CardContent>
-      <CardFooter>
-        <CreateTrainerDialog onCreate={handleCreate} />
-      </CardFooter>
     </Card>
   );
 };

@@ -1,34 +1,34 @@
-"use client"
-import { Particles } from "@/components/magicui/particles";
-import { useState, useEffect } from "react"
-import { TypingAnimation } from "@/components/magicui/typing-animation"
-import { Button } from "@/components/ui/button"
-import { Link } from "react-router"
-import { motion } from "framer-motion"
-import { ArrowRight } from "lucide-react"
+'use client';
+import { Particles } from '@/components/magicui/particles';
+import { useState, useEffect } from 'react';
+import { TypingAnimation } from '@/components/magicui/typing-animation';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router';
+import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 
 export const IntroPage = () => {
-  const [showButton, setShowButton] = useState(false)
+  const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShowButton(true)
-    }, 4000)
+      setShowButton(true);
+    }, 4000);
 
-    return () => clearTimeout(timer)
-  }, [])
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <main className="relative flex flex-col items-center justify-center min-h-screen">
-
       <div className="absolute inset-0 z-0">
-      <Particles
-        className="absolute inset-0 z-0"
-        quantity={100}
-        ease={80}
-        color={"#000000"}
-        refresh
-      />      </div>
+        <Particles
+          className="absolute inset-0 z-0"
+          quantity={500}
+          ease={80}
+          color={'#000000'}
+          refresh
+        />
+      </div>
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -66,8 +66,8 @@ export const IntroPage = () => {
           transition={{ duration: 0.5 }}
           className="mt-6"
         >
-          <Button className="px-6 py-6 text-lg font-medium transition-all duration-300 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 rounded-xl shadow-lg hover:shadow-xl">
-            <Link to="/" className="flex items-center gap-2">
+          <Button className="px-6 py-6 text-lg font-medium transition-all duration-300  rounded-xl shadow-lg hover:shadow-xl">
+            <Link to="/app" className="flex items-center gap-2">
               Go to Pokedex
               <ArrowRight className="w-5 h-5" />
             </Link>
@@ -80,5 +80,5 @@ export const IntroPage = () => {
         <div className="absolute -bottom-32 -right-32 w-80 h-80 rounded-full bg-indigo-100 dark:bg-indigo-900/20 blur-3xl opacity-60"></div>
       </div>
     </main>
-  )
-}
+  );
+};

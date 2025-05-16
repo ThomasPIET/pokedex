@@ -16,11 +16,11 @@ type IPokemon = {
   talents: string[] | null;
   stats: {
     hp: number;
-    attack: number;
-    defense: number;
-    special_attack: number;
-    special_defense: number;
-    speed: number;
+    atk: number;
+    def: number;
+    spe_atk: number;
+    spe_def: number;
+    vit: number;
   } | null;
   resistances:
     | {

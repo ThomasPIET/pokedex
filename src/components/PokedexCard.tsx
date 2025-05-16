@@ -17,10 +17,14 @@ import type IPokemon from '../types/IPokemon';
 export const PokedexCard = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
-  const { data = [], error, isLoading } = useGetPokemonsQuery(151); // Fetch more Pokémon
+  const { data = [], error, isLoading } = useGetPokemonsQuery(151);
 
-  // Filter Pokémon based on search term and selected types
   const filteredPokemon = data.filter((pokemon: IPokemon) => {
+    // Skip Pokémon with ID 0
+    if (pokemon.pokedex_id === 0) {
+      return false;
+    }
+    
     const matchesSearch =
       searchTerm === '' ||
       pokemon.name.en.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -35,13 +39,6 @@ export const PokedexCard = () => {
     return matchesSearch && matchesType;
   });
 
-  // Get all unique types from the data
-  const allTypes = Array.from(
-    new Set(
-      data.flatMap((pokemon: IPokemon) => pokemon.types || []).filter(Boolean)
-    )
-  ).sort();
-
   return (
     <Card className="h-full flex flex-col">
       <CardHeader>
@@ -52,7 +49,6 @@ export const PokedexCard = () => {
         <SearchBar
           searchTerm={searchTerm}
           onSearchChange={setSearchTerm}
-          types={allTypes}
           selectedTypes={selectedTypes}
           onTypeChange={setSelectedTypes}
         />
