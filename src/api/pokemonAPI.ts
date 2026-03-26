@@ -4,7 +4,7 @@ import IPokemon from '../types/IPokemon.tsx';
 export const pokemonAPI = createApi({
   reducerPath: 'pokemon',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://tyradex.vercel.app/api/v1/pokemon',
+    baseUrl: 'https://tyradex.app/api/v1/pokemon',
   }),
   tagTypes: ['pokemon'],
   endpoints: (builder) => ({
