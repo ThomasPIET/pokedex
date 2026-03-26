@@ -191,7 +191,7 @@ export function PokemonDetailDialog({
                               : talent &&
                                   typeof talent === 'object' &&
                                   'name' in talent
-                                ? // @ts-ignore
+                                ? // @ts-expect-error dynamic talent object shape
                                   talent.name
                                 : typeof talent === 'object'
                                   ? Object.values(talent)[0]
