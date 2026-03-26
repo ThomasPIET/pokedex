@@ -1,16 +1,17 @@
 # Build stage
 FROM node:20-alpine AS build
 
+RUN corepack enable && corepack prepare pnpm@10 --activate
+
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
 
 COPY index.html vite.config.ts tsconfig*.json ./
 COPY src ./src
 
-
-RUN npm run build
+RUN pnpm run build
 
 # Production stage
 FROM nginx:alpine
