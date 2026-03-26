@@ -9,6 +9,9 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  # Docker/GHCR exige que le "repository name" soit en minuscules.
+  # `github.repository` peut contenir des majuscules côté owner (ex: ThomasPIET/...), donc on normalise.
+  IMAGE_NAME_LOWER: ${{ lower(github.repository) }}
 
 jobs:
   lint:
@@ -85,7 +88,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_LOWER }}
           tags: |
             type=sha
             type=raw,value=latest
@@ -112,7 +115,7 @@ jobs:
 
     services:
       app:
-        image: ghcr.io/${{ github.repository }}:latest
+        image: ghcr.io/${{ lower(github.repository) }}:latest
         credentials:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
